@@ -4,9 +4,9 @@ touch alltrace
 for fn in ./*.bin; do
   dumpi2ascii $fn > ${fn}.txt
 	../sendtraffic.awk ${fn}.txt > ${fn}.traffic
-	rm -f ${fn}.txt
+	#rm -f ${fn}.txt
 	cat ${fn}.traffic >> alltrace
-	rm -f ${fn}.traffic 
+	#rm -f ${fn}.traffic 
 done
 awk '{arr[$3][$4]=arr[$3][$4]+$2} END{for (id1 in arr) for (id2 in arr[id1]) {print id1 " " id2 " " arr[id1][id2]}}' alltrace|sort -n -k 1 -k 2 > p2ptraffic
 
