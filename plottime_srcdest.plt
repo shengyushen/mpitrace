@@ -50,6 +50,7 @@
 set xlabel "time"
 set ylabel "src rank"
 set zlabel "dest rank"
+set view 100,250,1,1
 splot "alltrace" u 5:($2<10   ?$3:1/0):4,\
  "" u 5:($2<100  ?$3:1/0):4,\
  "" u 5:($2<1000 ?$3:1/0):4,\

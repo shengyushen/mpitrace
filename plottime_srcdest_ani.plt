@@ -46,9 +46,16 @@
 #             "" u 5:($3==187?$2:1/0),\
 #             "" u 5:($3==193?$2:1/0)
 
-
+set output 'xx.png'
 set xlabel "time"
 set ylabel "src rank"
-set zlabel "pack size(B)"
-splot "alltrace" u 5:3:2
-
+set zlabel "dest rank"
+set autoscale fix
+splot "alltrace" u 5:($2<10   ?$3:1/0):4,\
+ "" u 5:($2<100  ?$3:1/0):4,\
+ "" u 5:($2<1000 ?$3:1/0):4,\
+ "" u 5:($2<10000?$3:1/0):4
+do for [t=0:10] {
+	set view 100,t*10,1,1
+	replot
+}
