@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 rm -f alltrace
 touch alltrace
 for fn in ./*.bin; do
