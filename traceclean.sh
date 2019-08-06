@@ -1,0 +1,2 @@
+rm -f *.txt *.traffic
+
