@@ -1,0 +1,66 @@
+cr  Isend and waitall, but inverted diag
+genascii.sh
+splotcr.plt
+
+amg isend and waitall, diag
+genascii.sh
+splotcr.plt
+
+
+mindft allreduce:
+genascii.sh
+extractallreduce.sh
+gnuplot -p -e 'plot "allreduce2only" u 3:1'
+
+bigfft alltoallv + barrier
+genascii.sh
+extractall2allv.sh
+gnuplot -p -e 'plot "all2allv1" u 3:1'
+
+FillBoundary send+reduce+allgather :  diag send
+genascii.sh
+extractsend.sh  # this plot send traffic
+extractreduce.sh
+gnuplot -p -e 'splot "reduce1" u 1:3:6 '
+
+
+
+minife : send+allreduce+allgather : diag send
+genascii.sh
+extractsend.sh  # this plot send traffic
+extractallreduce.sh
+gnuplot -p -e 'plot "allreduce2only" u 3:1'
+
+amr : send diag+alltoall+allreduce+allgather+reduce+bcast+gather
+genascii.sh
+extractsend.sh  # this plot send traffic
+extractall2allv.sh
+gnuplot -p -e 'plot "all2allv1" u 3:1'
+extractallreduce.sh
+gnuplot -p -e 'plot "allreduce2only" u 3:1'
+
+
+
+multigrid :  send send+ reduce+allreduce+barrier+allgather
+genascii.sh
+extractsend.sh  # this plot send traffic
+extractallreduce.sh
+gnuplot -p -e 'plot "allreduce2only" u 3:1'
+
+
+partison :  send +allreduce +bcast+barrier
+genascii.sh
+extractsend.sh  # this plot send traffic
+extractallreduce.sh
+gnuplot -p -e 'plot "allreduce2" u 3:($8==4?$1:1/0),"" u 3:($8==5?$1:1/0)'
+
+
+
+snap : send + allreduce + bcast+barrier
+genascii.sh
+extractsend.sh  # this plot send traffic
+extractallreduce.sh
+
+
+miniamr
+
